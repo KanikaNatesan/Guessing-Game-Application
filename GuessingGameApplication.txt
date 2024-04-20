@@ -1,0 +1,83 @@
+import java.util.*;
+class Main{
+    public static void main(String[]args){
+        Game g=new Game();
+        g.call();
+        while(true){
+        System.out.println("Do You want to Play Again ?(Please type Yes/No)");
+        Scanner sc=new Scanner(System.in);
+        String val=sc.nextLine();
+        String val1="Yes";
+        if(val.equalsIgnoreCase(val1)){
+            g.call();
+        }
+        else{
+            System.out.println("Thank You for Playing the Game...");
+            break;
+        }
+    }
+    }
+}
+    class Game{
+        void call(){
+Scanner sc=new Scanner(System.in);
+System.out.print("ENTER THE PLAYER NAME:");
+String name=sc.nextLine();
+System.out.println("Welcome "+ name +" to the Game");
+System.out.println("Guess The Number?? If It matches with our Number... You Win the Game! ");
+System.out.println("Alert!!! Only 4 Chances to Win...");
+System.out.println("The number ranges from 1 to 100");
+System.out.println("Let the Game Starts...");
+Player player=new Player(name);
+GuessNumber game=new GuessNumber(player);
+game.play();
+}
+}
+
+class Player{
+    String plname;
+    int score;
+    Player(String name){
+        plname=name;
+        score=0;
+    }
+    }
+class GuessNumber{
+    Player player;
+    int NumberToGuess;
+    int attempts;
+    GuessNumber(Player player){
+        this.player=player;
+        Random random=new Random();
+        NumberToGuess=random.nextInt(100);
+        this.attempts=0;
+    }
+    void play(){
+    Scanner sc=new Scanner(System.in);
+    System.out.print("Guess any number:");
+  
+    while(true){
+        if(attempts>0){
+            System.out.print("Guess Another Number:");
+        }
+        int num=sc.nextInt();
+        attempts++;
+        if(num<NumberToGuess){
+            System.out.println("Your Number is too low.....Please Try Again.");
+        }
+        else if(num>NumberToGuess){
+            System.out.println("Your Number is too high.....Please Try Again.");
+        }
+        else{
+            System.out.println("Congrats "+player.plname+"!"+" You have won in "+attempts+" Attempts");
+            System.out.println("Number of Attempts You take:"+attempts);
+            break;
+        }
+        if(attempts==4){
+            System.out.println("Sorry! Your Chance is Over....Better Luck Next Time....");
+            break;
+        }
+    }
+    }
+    }
+
